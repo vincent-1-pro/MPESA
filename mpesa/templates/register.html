@@ -1,0 +1,238 @@
+
+{% load static %}
+
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>register</title>
+		<meta charset="utf-8">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="icon" href="{% static  'static1/images/favicon.ico'  %}">
+		<link rel="shortcut icon" href="{% static  'static1/images/favicon.ico'  %}" />
+		<link rel="stylesheet" href="{% static  'static1/booking/css/booking.css'  %}">
+		<link rel="stylesheet" href="{% static  'static1/css1/camera.css'  %}">
+		<link rel="stylesheet" href="{% static  'static1/css1/owl.carousel.css'  %}">
+		<link rel="stylesheet" href="{% static  'static1/css1/style.css'  %}">
+		<script src="{% static  'static1/js/jquery.js'  %}"></script>
+		<script src="{% static  'static1/js/jquery-migrate-1.2.1.js'  %}"></script>
+		<script src="{% static  'static1/js/script.js'  %}"></script>
+		<script src="{% static  'static1/js/superfish.js'  %}"></script>
+		<script src="{% static  'static1/js/jquery.ui.totop.js'  %}"></script>
+		<script src="{% static  'static1/js/jquery.equalheights.js'  %}"></script>
+		<script src="{% static  'static1/js/jquery.mobilemenu.js'  %}"></script>
+		<script src="{% static  'static1/js/jquery.easing.1.3.js'  %}"></script>
+		<script src="{% static  'static1/js/owl.carousel.js'  %}"></script>
+		<script src="{% static  'static1/js/camera.js'  %}"></script>
+		<!--[if (gt IE 9)|!(IE)]><!-->
+		<script src="{% static  'static1/js/jquery.mobile.customized.min.js'  %}"></script>
+		<!--<![endif]-->
+		<script src="{% static  'static1/booking/js/booking.js'  %}"></script>
+		<script>
+			$(document).ready(function(){
+			jQuery('#camera_wrap').camera({
+				loader: false,
+				pagination: false ,
+				minHeight: '444',
+				thumbnails: false,
+				height: '48.375%',
+				caption: true,
+				navigation: true,
+				fx: 'mosaic'
+			});
+			/*carousel*/
+			var owl=$("#owl");
+				owl.owlCarousel({
+				items : 2, //10 items above 1000px browser width
+				itemsDesktop : [995,2], //5 items between 1000px and 901px
+				itemsDesktopSmall : [767, 2], // betweem 900px and 601px
+				itemsTablet: [700, 2], //2 items between 600 and 0
+				itemsMobile : [479, 1], // itemsMobile disabled - inherit from itemsTablet option
+				navigation : true,
+				pagination : false
+				});
+			$().UItoTop({ easingType: 'easeOutQuart' });
+			});
+		</script>
+		<!--[if lt IE 8]>
+		<div style=' clear: both; text-align:center; position: relative;'>
+			<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+				<img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+			</a>
+		</div>
+		<![endif]-->
+		<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+		<link rel="stylesheet" media="screen" href="css/ie.css">
+		<![endif]-->
+	</head>
+	<body class="page1" id="top" >
+<!--==============================header=================================-->
+		<header>
+			<div class="container_12">
+				<div class="grid_12">
+					<div class="menu_block">
+						<nav class="horizontal-nav full-width horizontalNav-notprocessed">
+							<ul class="sf-menu">
+								<li class="current"><a href="#index">HOME</a></li>
+								<li><a href="">HOT DEALS</a></li>
+								<li><a href="">SHARES</a></li>
+								<li><a href="">INVEST</a></li>
+								<li><a href="">CONTACTS</a></li>
+							</ul>
+						</nav>
+						<div class="clear"></div>
+					</div>
+				</div>
+				
+			</div>
+		</header>
+		
+<!--==============================Content=================================-->
+		<div class="content">	
+			<div class="container_12" style="background-color: #caddf0;">
+				
+				<div class="clear"></div>
+				<div class="grid_6">
+					<marquee behavior="scroll" direction="right"><h3 style="color: red; ">Create Account</h3></marquee>
+					<div>
+						{% for message in messages %}
+						<h5>{{message}}</h5>
+						{% endfor %}
+					</div>
+					<form id="bookingForm" action="register" method="POST" >
+						{% csrf_token %}
+
+
+						<div class="fl1">
+							<div class="tmInput">
+								<input name="username" placeHolder="User Name:" type="text" data-constraints='@NotEmpty @Required @AlphaSpecial'>
+							</div>
+							<div class="tmInput">
+								<input name="first_name" placeHolder="First Name:" type="text" data-constraints="@NotEmpty @Required">
+							</div>
+						</div>
+						<div class="fl1">
+							<div class="tmInput">
+								<input name="last_name" placeHolder="Last Name:" type="text" data-constraints="@NotEmpty @Required @Email">
+							</div>
+							<div class="tmInput mr0">
+								<input name="email" placeHolder="Email:" type="text" data-constraints="@NotEmpty @Required">
+							</div>
+
+							
+								<!--<div class="tmInput">
+									<input name="phone" placeHolder="+254 xxxxxx:" type="number" data-constraints='@NotEmpty @Required @AlphaSpecial'>
+								</div>-->
+								
+							
+						</div>
+						<div class="clear"></div>
+
+                        <div class="fl1">
+							<div class="tmInput">
+								<input name="password1" placeHolder="Input Password:" type="password" data-constraints='@NotEmpty @Required @AlphaSpecial'>
+							</div>
+							<div class="tmInput">
+								<input name="password2" placeHolder="Confirm Password:" type="password" data-constraints="@NotEmpty @Required">
+							</div>
+						</div>
+
+
+
+						
+						<div class="clear"></div>
+
+						
+					
+						<input type="submit" class="btn" value="Submit">
+						<p>Already Have Account? <a href="login">login</a></p>
+					</form>
+				
+				</div>
+				<div class="grid_5 prefix_1"  >
+					<h3>Welcome</h3>
+					<img src="{% static  'static1/images/award1.jpg'  %}" alt="" class="img_inner fleft">
+					<div class="extra_wrapper">
+						<p>Win upto 50, 000 shillings every 15 minutes.</p>
+						And get upto 30% bonus money in every <strong>ksh:</strong> 100 Deposit
+					</div>
+					<div class="clear cl1"></div>
+					<p>Recieve your money in an instant using a wide range of available payment systems in kenya. like <a href="btn ">mpesa</a> </p>
+				  <h4>Presenter's Advice</h4>
+					<blockquote class="bq1">
+						<img src="{% static  'static1/images/slide.jpg'  %}" alt="" style="max-width: 50%;" class="img_inner noresize fleft">
+						<div class="extra_wrapper">
+							<p>Play As many times As possible to stand a chance to <kbd>WIN</kbd> upto 50, 000 Kenya Shillings every 15 minutes. </p>
+							<div class="alright">
+								<div class="col1">MCA Tricky</div>
+								<a href="register" class="btn">Play Now</a>
+							</div>
+						</div>
+					</blockquote>
+				</div>
+				<div class="grid_12">
+					<h3 class="head1">Latest Milele Winners!</h3>
+				</div>
+				<div class="grid_4">
+					<div class="block1">
+						<time datetime="2014-01-01">10<span>Jan</span></time>
+						<div class="extra_wrapper">
+							<div class="text1 col1"><a href="#">Vincent Wambua</a></div>
+							From Machakos County. A winner of Ksh: 30,000 on Milele Breakfast Show.
+						</div>
+					</div>
+				</div>
+				<div class="grid_4">
+					<div class="block1">
+						<time datetime="2014-01-01">21<span>Jan</span></time>
+						<div class="extra_wrapper">
+							<div class="text1 col1"><a href="#">Samson Kinyanjui</a></div>
+							Our Next Winner From Nakuru County. Won Ksh: 50, 000 on Milele Drive
+						</div>
+					</div>
+				</div>
+				<div class="grid_4">
+					<div class="block1">
+						<time datetime="2014-01-01">15<span>Feb</span></time>
+						<div class="extra_wrapper">
+							<div class="text1 col1"><a href="#">Felix Lopuran</a></div>
+							A Winner of Ksh: 30,000 on Milele Breakfast show From Baringo County
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--chat-->
+
+<script>(function(){var pp=document.createElement('script'), ppr=document.getElementsByTagName('script')[0]; stid='ZGk4TVVCbklFVk5FRUhxSU9CZjVrZz09';pp.type='text/javascript'; pp.async=true; pp.src=('https:' == document.location.protocol ? 'https://' : 'http://') + 's01.live2support.com/dashboardv2/chatwindow/'; ppr.parentNode.insertBefore(pp, ppr);})();</script>
+<!--https://www.proprofs.com/chat/chat-page/?id=ZGk4TVVCbklFVk5FRUhxSU9CZjVrZz09  -->
+
+<!--==============================footer=================================-->
+		<footer>
+			<div class="container_12">
+				<div class="grid_12">
+					<div class="socials">
+						<a href="" class="fa fa-facebook"></a>
+						<a href="" class="fa fa-twitter"></a>
+						<a href="" class="fa fa-google-plus"></a>
+					</div>
+					<div class="copy">
+						Milele Investments @ 2021 | <a href="#">Privacy Policy</a> |  Designed by MileleInvestment.com
+					</div>
+				</div>
+			</div>
+		</footer>
+		<script>
+			$(function (){
+				$('#bookingForm').bookingForm({
+					ownerEmail: '#'
+				});
+			})
+			$(function() {
+				$('#bookingForm input, #bookingForm textarea').placeholder();
+			});
+		</script>
+	</body>
+</html>
+
